@@ -1,16 +1,17 @@
 version: '3.8'
 
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: lifelink-mysql
+  postgres:
+    image: postgres:15
+    container_name: lifelink-postgres
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      MYSQL_DATABASE: lifelinkdb
-      MYSQL_ROOT_PASSWORD: root1234
+      POSTGRES_DB: lifelinkdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root1234
     volumes:
-      - db-data:/var/lib/mysql
+      - db-data:/var/lib/postgresql/data
     networks:
       - lifelink-net
 
@@ -22,15 +23,18 @@ services:
     ports:
       - "8082:8082"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/lifelinkdb?useSSL=false&allowPublicKeyRetrieval=true
-      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/lifelinkdb
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/lifelinkdb
+      - DATABASE_DRIVER=org.postgresql.Driver
+      - DATABASE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=root1234
       - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID:-}
       - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN:-}
       - TWILIO_FROM_NUMBER=${TWILIO_FROM_NUMBER:-}
       - FIREBASE_SERVICE_ACCOUNT_PATH=${FIREBASE_SERVICE_ACCOUNT_PATH:-}
     depends_on:
-      - mysql
+      - postgres
     networks:
       - lifelink-net
 

@@ -1,0 +1,52 @@
+services:
+  # Spring Boot Backend (Web Service using Docker)
+  - type: web
+    name: lifelink-backend
+    env: docker
+    region: ohio
+    plan: free
+    dockerContext: backend
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lifelink-db
+          property: connectionString
+      - key: DATABASE_DRIVER
+        value: org.postgresql.Driver
+      - key: DATABASE_DIALECT
+        value: org.hibernate.dialect.PostgreSQLDialect
+      - key: FRONTEND_URL
+        value: https://lifelink-frontend.onrender.com
+      - key: TWILIO_ACCOUNT_SID
+        value: dummy
+      - key: TWILIO_AUTH_TOKEN
+        value: dummy
+      - key: TWILIO_FROM_NUMBER
+        value: dummy
+      - key: FIREBASE_SERVICE_ACCOUNT_PATH
+        value: dummy
+      - key: SERVER_PORT
+        value: "8082"
+
+  # React/Vite Frontend (Static Site)
+  - type: web
+    name: lifelink-frontend
+    env: static
+    region: ohio
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_BACKEND_URL
+        fromService:
+          type: web
+          name: lifelink-backend
+          envVarKey: RENDER_EXTERNAL_URL
+
+databases:
+  - name: lifelink-db
+    plan: free
+    databaseName: lifelinkdb
+    user: lifelink_user

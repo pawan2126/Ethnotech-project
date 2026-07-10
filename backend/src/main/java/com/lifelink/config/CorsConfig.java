@@ -12,8 +12,13 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
+                String frontendUrl = System.getenv("FRONTEND_URL");
+                String[] allowedOrigins = frontendUrl != null ? 
+                        new String[]{"http://localhost:3000", "http://localhost:5173", frontendUrl} : 
+                        new String[]{"http://localhost:3000", "http://localhost:5173"};
+                        
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:5174", "http://localhost:5175", "http://localhost:5176", "http://localhost:5179") // allow frontend dev origins
+                        .allowedOrigins(allowedOrigins)
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                         .allowedHeaders("*")
                         .allowCredentials(true);
