@@ -1,0 +1,31 @@
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+build/
+frontend/build/
+.env
+.env.local
+.env.*.local
+npm-debug.log*
+
+# Java / Spring Boot Backend
+target/
+backend/target/
+*.class
+*.log
+.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+
+# MacOS
+.DS_Store
+
+# Docker (Optional ignore if there are secrets)
+# .env inside docker or secrets

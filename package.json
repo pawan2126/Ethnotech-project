@@ -1,0 +1,13 @@
+{
+  "name": "lifelink-root",
+  "private": true,
+  "scripts": {
+    "dev:backend": "npm run dev:backend-win",
+    "dev:backend-win": "cd backend && call \"C:/Users/GOLLA PAWAN/Desktop/Ethnotech project/maven/apache-maven-3.9.6/bin/mvn.cmd\" spring-boot:run",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
