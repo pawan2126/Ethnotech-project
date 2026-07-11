@@ -1,21 +1,44 @@
 @import "tailwindcss";
 
+@theme {
+  --color-slate-950: #05050d; /* Luxury deep obsidian black */
+  --color-slate-900: #0c0d21; /* Deep midnight indigo-navy */
+  --color-slate-850: #141635; /* Indigo-slate card highlight */
+  --color-slate-800: #1c1d3f; /* Sleek indigo border */
+  --color-red-600: #e11d48;    /* Vibrant neon crimson */
+  --color-red-500: #f43f5e;    /* Soft neon rose */
+}
+
 @layer base {
   body {
-    background-color: #020617; /* bg-slate-950 */
+    background: radial-gradient(circle at 15% 15%, rgba(225, 29, 72, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.06) 0%, transparent 45%),
+                #05050d;
     color: #f8fafc; /* text-slate-100 */
     transition-property: color, background-color;
     transition-duration: 300ms;
     font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* Premium global input focus states */
+  input, select, textarea {
+    transition: all 0.2s ease-in-out;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: rgba(225, 29, 72, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.12) !important;
+    background-color: #05050d !important;
   }
 }
 
 /* Glassmorphism Classes */
 .glass {
-  background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 13, 33, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(225, 29, 72, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
 .glass-light {
@@ -26,9 +49,17 @@
 }
 
 .glass-card {
-  background: rgba(30, 41, 59, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(12, 13, 33, 0.45);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(225, 29, 72, 0.2);
+  box-shadow: 0 8px 30px 0 rgba(225, 29, 72, 0.06);
+  transform: translateY(-2px);
 }
 
 /* Crimson Pulse Animation for SOS */
