@@ -82,6 +82,10 @@ public class ApiController {
             return ResponseEntity.badRequest().body(Map.of("message", "Email already exists"));
         }
 
+        if (userRepository.findByPhone(phone).isPresent()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Phone number already exists"));
+        }
+
         User user = new User(email, password, phone, role);
         user = userRepository.save(user);
 
