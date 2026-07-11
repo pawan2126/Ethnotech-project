@@ -4,7 +4,7 @@ import { DemoContext } from '../context/DemoContext';
 import { Heart, Mail, Lock, ShieldCheck, Cpu, ArrowRight } from 'lucide-react';
 
 const LoginPage = () => {
-  const { login, enterDemoMode, isOnline } = useContext(DemoContext);
+  const { login, enterDemoMode, isOnline, darkMode } = useContext(DemoContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -43,7 +43,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between py-12 px-6 fade-in relative overflow-hidden bg-slate-950 text-slate-100">
+    <div className={`min-h-screen flex flex-col justify-between py-12 px-6 fade-in relative overflow-hidden transition-colors duration-300 ${
+      darkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'
+    }`}>
       {/* Background gradients */}
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-red-600/10 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[100px] pointer-events-none" />

@@ -224,6 +224,14 @@ export const DemoProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
   // ==========================================
   // BUSINESS LOGIC (DEMO MODE FALLBACKS)
   // ==========================================
